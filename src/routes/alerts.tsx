@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router";import { AlertsPage } from "../pages/Operations";
+export const Route=createFileRoute("/alerts")({head:()=>({meta:[{title:"Alerts — CYBERSHIELD X"},{name:"description",content:"Triage simulated security alerts by severity and status."},{property:"og:title",content:"Alerts — CYBERSHIELD X"},{property:"og:description",content:"Triage simulated security alerts by severity and status."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:AlertsPage});

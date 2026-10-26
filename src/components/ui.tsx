@@ -1,0 +1,17 @@
+import { AlertTriangle, CheckCircle2, CircleDot, Search, X } from "lucide-react";
+import { motion } from "framer-motion";
+import type { ReactNode } from "react";
+import type { Severity, Status } from "../data/demo";
+
+export function Panel({title,eyebrow,action,children,className=""}:{title?:string;eyebrow?:string;action?:ReactNode;children:ReactNode;className?:string}){return <motion.section initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{duration:.22}} className={`panel ${className}`}>{(title||action)&&<header className="panel-header"><div>{eyebrow&&<p className="eyebrow">{eyebrow}</p>}{title&&<h2>{title}</h2>}</div>{action}</header>}{children}</motion.section>}
+export function StatusBadge({value}:{value:Severity|Status|string}){return <span className={`status status-${value.toLowerCase()}`}><span className="status-dot"/>{value}</span>}
+export function LiveIndicator({label="LIVE"}:{label?:string}){return <span className="live-indicator"><span className="pulse-dot"/>{label}</span>}
+export function SearchBox({value,onChange,placeholder="Search records..."}:{value:string;onChange:(value:string)=>void;placeholder?:string}){return <label className="search-box"><Search size={15}/><span className="sr-only">Search</span><input value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}/></label>}
+export function FilterSelect({label,value,onChange,options}:{label:string;value:string;onChange:(value:string)=>void;options:string[]}){return <label className="filter-select"><span>{label}</span><select value={value} onChange={e=>onChange(e.target.value)}>{options.map(option=><option key={option}>{option}</option>)}</select></label>}
+export function EmptyState({message="No security events found."}:{message?:string}){return <div className="state-box"><CircleDot size={20}/><p>{message}</p></div>}
+export function LoadingState({message="Loading security events…"}:{message?:string}){return <div className="state-box"><span className="spinner"/><p>{message}</p></div>}
+export function ErrorState({message="Unable to load security data."}:{message?:string}){return <div className="state-box error-text"><AlertTriangle size={20}/><p>{message}</p></div>}
+export function SuccessToast({message}:{message:string}){return <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} className="toast"><CheckCircle2 size={17}/>{message}</motion.div>}
+export function Drawer({open,onClose,title,children}:{open:boolean;onClose:()=>void;title:string;children:ReactNode}){if(!open)return null;return <div className="drawer-layer" role="dialog" aria-modal="true" aria-label={title}><button className="drawer-scrim" onClick={onClose} aria-label="Close panel"/><motion.aside initial={{x:40,opacity:0}} animate={{x:0,opacity:1}} className="detail-drawer"><header><div><p className="eyebrow">RECORD DETAIL</p><h2>{title}</h2></div><button className="icon-button" onClick={onClose} aria-label="Close"><X size={18}/></button></header>{children}</motion.aside></div>}
+export function PageIntro({kicker,title,description,action}:{kicker:string;title:string;description:string;action?:ReactNode}){return <div className="page-intro"><div><p className="eyebrow">{kicker}</p><h1>{title}</h1><p>{description}</p></div>{action}</div>}
+export function DataTable({columns,children}:{columns:string[];children:ReactNode}){return <div className="table-scroll"><table><thead><tr>{columns.map(column=><th key={column}>{column}</th>)}</tr></thead><tbody>{children}</tbody></table></div>}

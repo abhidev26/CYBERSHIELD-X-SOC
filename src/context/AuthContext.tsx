@@ -1,0 +1,7 @@
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+export type Profile = { id:string; name:string; email:string; role:"ADMIN"|"ANALYST"|"VIEWER"; avatar?:string; preferences:{ compactMode:boolean; notifications:boolean } };
+type AuthState = { user:Profile|null; token:string|null; isAuthenticated:boolean; login:(email:string,password:string)=>Promise<void>; logout:()=>void };
+const AuthContext=createContext<AuthState|undefined>(undefined);
+const demoProfile:Profile={id:"profile-demo-01",name:"Demo Analyst",email:"analyst@example.test",role:"ANALYST",preferences:{compactMode:true,notifications:true}};
+export function AuthProvider({children}:{children:ReactNode}){const [user,setUser]=useState<Profile|null>(null);const [token,setToken]=useState<string|null>(null);useEffect(()=>{if(sessionStorage.getItem("csx-demo-session")){setUser(demoProfile);setToken("demo-session-token")}},[]);const login=async(email:string,password:string)=>{if(!email||!password)throw new Error("Enter an email and password.");sessionStorage.setItem("csx-demo-session","active");setUser({...demoProfile,email});setToken("demo-session-token")};const logout=()=>{sessionStorage.removeItem("csx-demo-session");setUser(null);setToken(null)};return <AuthContext.Provider value={{user,token,isAuthenticated:Boolean(user),login,logout}}>{children}</AuthContext.Provider>}
+export function useAuth(){const value=useContext(AuthContext);if(!value)throw new Error("useAuth must be used inside AuthProvider");return value}

@@ -1,0 +1,2 @@
+import { useEffect,useState } from "react";import { events,type SecurityEvent } from "../data/demo";
+export function useLiveEvents(){const[data,setData]=useState<SecurityEvent[]>(events.slice(0,6));useEffect(()=>{const timer=window.setInterval(()=>{const base=events[Math.floor(Math.random()*events.length)];if(!base)return;const now=new Date().toLocaleTimeString("en-GB",{hour12:false});setData(current=>[{...base,id:`EV-${Math.floor(9100+Math.random()*700)}`,timestamp:`2026-09-23 ${now}`},...current].slice(0,8))},5500);return()=>window.clearInterval(timer)},[]);return data}

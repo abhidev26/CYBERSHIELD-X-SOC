@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router";import { IncidentsPage } from "../pages/Operations";
+export const Route=createFileRoute("/incidents")({head:()=>({meta:[{title:"Incidents — CYBERSHIELD X"},{name:"description",content:"Coordinate simulated security incident response workflows."},{property:"og:title",content:"Incidents — CYBERSHIELD X"},{property:"og:description",content:"Coordinate simulated security incident response workflows."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:IncidentsPage});

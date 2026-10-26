@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router";import { UsersPage } from "../pages/Management";
+export const Route=createFileRoute("/users")({head:()=>({meta:[{title:"Users & Roles — CYBERSHIELD X"},{name:"description",content:"Manage profile-ready simulated users and roles."},{property:"og:title",content:"Users & Roles — CYBERSHIELD X"},{property:"og:description",content:"Manage profile-ready simulated users and roles."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:UsersPage});

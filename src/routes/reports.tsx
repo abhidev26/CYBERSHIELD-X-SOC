@@ -1,0 +1,2 @@
+import { createFileRoute } from "@tanstack/react-router";import { ReportsPage } from "../pages/Management";
+export const Route=createFileRoute("/reports")({head:()=>({meta:[{title:"Reports — CYBERSHIELD X"},{name:"description",content:"Prepare simulated security summaries and export requests."},{property:"og:title",content:"Reports — CYBERSHIELD X"},{property:"og:description",content:"Prepare simulated security summaries and export requests."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:ReportsPage});
